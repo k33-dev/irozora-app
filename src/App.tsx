@@ -439,15 +439,18 @@ const App: React.FC = () => {
       alignItems: 'center',
       justifyContent: 'center',
       fontFamily: "'M PLUS Rounded 1c', 'Zen Maru Gothic', 'Meiryo', sans-serif",
-      padding: '4vw 0',
+      padding: '3vw 0',
+      boxSizing: 'border-box',
+      width: '100vw',
+      overflowX: 'hidden',
     }}>
       <div style={{
         background: '#fff',
-        borderRadius: 28,
+        borderRadius: 20,
         boxShadow: '0 8px 32px #f8b6e055',
-        padding: '32px 6vw 32px 6vw',
-        maxWidth: 420,
-        width: '90%',
+        padding: '24px 3vw 24px 3vw',
+        maxWidth: '100%',
+        width: '100%',
         minHeight: 'auto',
         textAlign: 'center',
         margin: '0 auto',
@@ -526,34 +529,39 @@ const App: React.FC = () => {
           <>
             <div style={{
               fontWeight: 700,
-              fontSize: '1.15em',
+              fontSize: '1.1em',
               color: '#ff5ca7',
-              marginBottom: 18,
+              marginBottom: 14,
               lineHeight: 1.3,
-              padding: '0 10px',
+              padding: '0 2vw',
+              wordBreak: 'break-word',
             }}>{questions[current].label}</div>
             <div style={{ 
               display: 'flex', 
               flexWrap: 'wrap', 
-              gap: '10px 16px', 
-              marginBottom: 18,
+              gap: '8px 8px', 
+              marginBottom: 14,
               justifyContent: 'center',
-              padding: '0 10px',
+              padding: '0 2vw',
+              width: '100%',
+              boxSizing: 'border-box',
             }}>
               {questions[current].options.map(opt => (
                 <label key={opt} style={{
-                  marginBottom: 6,
+                  marginBottom: 4,
                   fontSize: '1em',
                   color: '#2d2d2d',
                   display: 'flex',
                   alignItems: 'center',
                   cursor: 'pointer',
                   borderRadius: 8,
-                  padding: '4px 10px',
+                  padding: '4px 8px',
                   background: answers[questions[current].key] === opt ? '#ffe15633' : 'transparent',
                   border: answers[questions[current].key] === opt ? '1.5px solid #00bcd4' : '1.5px solid #eee',
                   transition: 'background 0.2s, border 0.2s, box-shadow 0.15s, transform 0.12s',
                   boxShadow: answers[questions[current].key] === opt ? '0 2px 8px #00bcd433' : 'none',
+                  minWidth: 60,
+                  justifyContent: 'center',
                 }}
                 onMouseDown={e => e.currentTarget.style.transform = 'scale(0.97)'}
                 onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
@@ -566,8 +574,8 @@ const App: React.FC = () => {
                     checked={answers[questions[current].key] === opt}
                     onChange={() => handleAnswer(questions[current].key, opt)}
                     style={{
-                      width: 18,
-                      height: 18,
+                      width: 20,
+                      height: 20,
                       accentColor: '#3498db',
                       marginRight: 6,
                     }}
@@ -578,11 +586,11 @@ const App: React.FC = () => {
             </div>
             {/* 最後の質問なら自由記述欄を表示 */}
             {current === questions.length - 1 && (
-              <div style={{ marginBottom: 18, textAlign: 'left' }}>
+              <div style={{ marginBottom: 14, textAlign: 'left', padding: '0 2vw' }}>
                 <div style={{
-                  marginBottom: 8,
+                  marginBottom: 6,
                   fontWeight: 600,
-                  fontSize: '1.08em',
+                  fontSize: '1em',
                   color: '#00bcd4',
                   lineHeight: 1.3,
                 }}>自由記述（キーワード例：海、花、森、太陽、夜、空、火、雪、夢、音楽 など）</div>
@@ -590,7 +598,7 @@ const App: React.FC = () => {
                   value={freeText}
                   onChange={e => setFreeText(e.target.value)}
                   rows={2}
-                  style={{ width: '100%', fontSize: '1em', borderRadius: 8, border: '1.5px solid #ff5ca7', padding: 10, resize: 'vertical', minHeight: 40, transition: 'box-shadow 0.15s', background: '#fff6fa' }}
+                  style={{ width: '100%', fontSize: '1em', borderRadius: 8, border: '1.5px solid #ff5ca7', padding: 10, resize: 'vertical', minHeight: 40, transition: 'box-shadow 0.15s', background: '#fff6fa', boxSizing: 'border-box' }}
                   placeholder="自由に入力してください"
                   onFocus={e => e.currentTarget.style.boxShadow = '0 2px 8px #ff5ca7'}
                   onBlur={e => e.currentTarget.style.boxShadow = 'none'}
@@ -603,15 +611,16 @@ const App: React.FC = () => {
               border: 'none',
               borderRadius: 18,
               padding: '16px 0',
-              fontSize: 'clamp(16px, 4vw, 20px)',
+              fontSize: 'clamp(15px, 4vw, 18px)',
               fontWeight: 700,
               width: '100%',
               boxShadow: '0 4px 16px #ffb34755',
               cursor: 'pointer',
-              marginTop: 12,
+              marginTop: 10,
               transition: 'background 0.3s, transform 0.15s, box-shadow 0.15s',
               letterSpacing: 1.2,
               whiteSpace: 'nowrap',
+              boxSizing: 'border-box',
             }}
             onMouseDown={e => e.currentTarget.style.transform = 'scale(0.97)'}
             onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
@@ -712,7 +721,7 @@ const App: React.FC = () => {
             position: 'absolute',
             left: '50%',
             transform: 'translateX(-50%)',
-            bottom: 20,
+            bottom: 16,
             background: 'linear-gradient(90deg, #00bcd4 0%, #6decb9 100%)',
             color: '#fff',
             border: 'none',
@@ -720,12 +729,13 @@ const App: React.FC = () => {
             padding: '7px 0',
             fontSize: 13,
             fontWeight: 700,
-            width: 120,
+            width: 110,
             boxShadow: '0 1px 4px #00bcd433',
             cursor: 'pointer',
             textDecoration: 'none',
             letterSpacing: 1,
             transition: 'background 0.3s, transform 0.15s, box-shadow 0.15s',
+            boxSizing: 'border-box',
           }}
           onMouseDown={e => e.currentTarget.style.transform = 'scale(0.97)'}
           onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
