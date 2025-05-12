@@ -438,7 +438,7 @@ const App: React.FC = () => {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      fontFamily: "'M PLUS Rounded 1c', 'Zen Maru Gothic', 'Meiryo', sans-serif",
+      fontFamily: "'Yusei Magic', 'M PLUS Rounded 1c', 'Zen Maru Gothic', 'Meiryo', sans-serif",
       padding: '4vw 0',
     }}>
       <div style={{
@@ -462,13 +462,13 @@ const App: React.FC = () => {
         {step === 0 && (
           <>
             <div style={{
-              fontFamily: "'M PLUS Rounded 1c', 'Zen Maru Gothic', 'Meiryo', sans-serif",
+              fontFamily: "'Yusei Magic', 'M PLUS Rounded 1c', 'Zen Maru Gothic', 'Meiryo', sans-serif",
               fontWeight: 900,
               fontSize: 48,
               color: '#ff5ca7',
               letterSpacing: 3,
-              marginBottom: 48,
-              marginTop: 0,
+              marginBottom: 32,
+              marginTop: 20,
               textShadow: '0 2px 8px #6decb9',
             }}>いろぞら診断</div>
             <button onClick={handleStart} style={{
@@ -476,11 +476,11 @@ const App: React.FC = () => {
               color: '#fff',
               border: 'none',
               borderRadius: 32,
-              padding: '28px 0',
-              fontSize: 28,
+              padding: '22px 40px',
+              fontSize: 24,
               fontWeight: 800,
-              width: '100%',
-              maxWidth: 420,
+              width: 'fit-content',
+              maxWidth: '100%',
               minWidth: 220,
               boxShadow: '0 8px 32px #ff5ca799',
               cursor: 'pointer',
@@ -490,9 +490,12 @@ const App: React.FC = () => {
               transform: 'none',
               transition: 'background 0.3s, transform 0.15s, box-shadow 0.15s',
               letterSpacing: 1.2,
-              whiteSpace: 'nowrap',
+              whiteSpace: 'normal',
               display: 'block',
               margin: '0 auto',
+              overflow: 'hidden',
+              textAlign: 'center',
+              wordBreak: 'break-word',
             }}
             onMouseDown={e => e.currentTarget.style.transform = 'scale(0.97)'}
             onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
@@ -638,6 +641,27 @@ const App: React.FC = () => {
               {current === questions.length - 1 ? (loading ? '診断中...' : '診断結果を見る') : '次へ'}
             </button>
             {error && <div style={{ color: 'red', marginTop: 16 }}>{error}</div>}
+            {/* 質問中は右上にトップへ戻るボタン */}
+            <button onClick={handleRestart} style={{
+              position: 'absolute',
+              top: 18,
+              right: 18,
+              background: '#f5faff',
+              color: '#3498db',
+              border: '1.5px solid #b3e0fc',
+              borderRadius: 8,
+              padding: '6px 16px',
+              fontSize: 16,
+              fontWeight: 600,
+              cursor: 'pointer',
+              boxShadow: '0 2px 8px rgba(52,152,219,0.04)',
+              transition: 'background 0.2s, color 0.2s, transform 0.1s',
+              zIndex: 2,
+            }}
+            onMouseDown={e => e.currentTarget.style.transform = 'scale(0.96)'}
+            onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
+            onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+            >トップに戻る</button>
           </>
         )}
         {step === 2 && (
