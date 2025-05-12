@@ -447,11 +447,12 @@ const App: React.FC = () => {
         boxShadow: '0 8px 32px #f8b6e055',
         padding: '32px 6vw 32px 6vw',
         maxWidth: 420,
-        width: '100%',
-        minHeight: 420,
+        width: '90%',
+        minHeight: 'auto',
         textAlign: 'center',
         margin: '0 auto',
         position: 'relative',
+        boxSizing: 'border-box',
       }}>
         {/* 質問中は右上にトップへ戻るボタン */}
         {step === 1 && (
@@ -529,8 +530,16 @@ const App: React.FC = () => {
               color: '#ff5ca7',
               marginBottom: 18,
               lineHeight: 1.3,
+              padding: '0 10px',
             }}>{questions[current].label}</div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px 16px', marginBottom: 18 }}>
+            <div style={{ 
+              display: 'flex', 
+              flexWrap: 'wrap', 
+              gap: '10px 16px', 
+              marginBottom: 18,
+              justifyContent: 'center',
+              padding: '0 10px',
+            }}>
               {questions[current].options.map(opt => (
                 <label key={opt} style={{
                   marginBottom: 6,
@@ -594,7 +603,7 @@ const App: React.FC = () => {
               border: 'none',
               borderRadius: 18,
               padding: '16px 0',
-              fontSize: 20,
+              fontSize: 'clamp(16px, 4vw, 20px)',
               fontWeight: 700,
               width: '100%',
               boxShadow: '0 4px 16px #ffb34755',
@@ -619,15 +628,15 @@ const App: React.FC = () => {
           <>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 8 }}>
               <div style={{
-                width: 120,
-                height: 120,
+                width: 'clamp(100px, 30vw, 120px)',
+                height: 'clamp(100px, 30vw, 120px)',
                 background: finalColor && finalColor.startsWith('#') ? finalColor : '#e0e0e0',
                 borderRadius: 20,
                 border: '2.5px solid #eee',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontSize: 26,
+                fontSize: 'clamp(20px, 5vw, 26px)',
                 color: finalColor && finalColor.startsWith('#') ? '#ff5ca7' : '#888',
                 margin: '0 auto',
                 boxShadow: '0 2px 12px rgba(52,152,219,0.08)',
@@ -701,7 +710,8 @@ const App: React.FC = () => {
           style={{
             display: 'inline-block',
             position: 'absolute',
-            left: 20,
+            left: '50%',
+            transform: 'translateX(-50%)',
             bottom: 20,
             background: 'linear-gradient(90deg, #00bcd4 0%, #6decb9 100%)',
             color: '#fff',
