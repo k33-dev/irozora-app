@@ -311,6 +311,46 @@ function getRandomQuestions(n: number) {
   return shuffled.slice(0, n);
 }
 
+// HEX→HSL変換関数
+function hexToHsl(hex: string): { h: number, s: number, l: number } {
+  let r = parseInt(hex.slice(1, 3), 16) / 255;
+  let g = parseInt(hex.slice(3, 5), 16) / 255;
+  let b = parseInt(hex.slice(5, 7), 16) / 255;
+  let max = Math.max(r, g, b), min = Math.min(r, g, b);
+  let h = 0, s = 0, l = (max + min) / 2;
+  if (max !== min) {
+    let d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+      case g: h = (b - r) / d + 2; break;
+      case b: h = (r - g) / d + 4; break;
+    }
+    h *= 60;
+  }
+  return { h, s: s * 100, l: l * 100 };
+}
+
+// HSL値から色名を判定
+function getColorName(hex: string): string {
+  if (!hex || !hex.startsWith('#') || hex.length !== 7) return '';
+  const { h, s, l } = hexToHsl(hex);
+  if (l >= 95) return '白';
+  if (l <= 10) return '黒';
+  if (s <= 15) return 'グレー';
+  if (l > 80 && s < 30) return 'ベージュ';
+  if (h >= 20 && h < 50) return '黄';
+  if (h >= 50 && h < 85) return '黄緑';
+  if (h >= 85 && h < 170) return '緑';
+  if (h >= 170 && h < 200) return '水色';
+  if (h >= 200 && h < 260) return '青';
+  if (h >= 260 && h < 320) return '紫';
+  if ((h >= 320 && h < 345) || (h >= 345 || h < 10)) return 'ピンク';
+  if (h >= 10 && h < 20) return 'オレンジ';
+  if (h >= 345 || h < 10) return '赤';
+  return '茶';
+}
+
 const App: React.FC = () => {
   const [answers, setAnswers] = useState<{ [key: string]: string }>({});
   const [freeText, setFreeText] = useState('');
@@ -449,14 +489,12 @@ const App: React.FC = () => {
         maxWidth: 520,
         width: '90%',
         minHeight: 480,
-        textAlign: 'center',
         margin: '0 auto',
         position: 'relative',
         boxSizing: 'border-box',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
       }}>
         {/* トップ画面のみ表示 */}
         {step === 0 && (
@@ -476,26 +514,18 @@ const App: React.FC = () => {
               color: '#fff',
               border: 'none',
               borderRadius: 32,
-              padding: '22px 40px',
-              fontSize: 24,
+              padding: '28px 56px',
+              fontSize: 28,
               fontWeight: 800,
-              width: 'fit-content',
-              maxWidth: '100%',
-              minWidth: 220,
               boxShadow: '0 8px 32px #ff5ca799',
               cursor: 'pointer',
               position: 'relative',
-              left: '0',
-              top: '0',
               transform: 'none',
               transition: 'background 0.3s, transform 0.15s, box-shadow 0.15s',
               letterSpacing: 1.2,
-              whiteSpace: 'normal',
-              display: 'block',
-              margin: '0 auto',
-              overflow: 'hidden',
-              textAlign: 'center',
-              wordBreak: 'break-word',
+              whiteSpace: 'nowrap',
+              marginTop: 40,
+              alignSelf: 'center',
             }}
             onMouseDown={e => e.currentTarget.style.transform = 'scale(0.97)'}
             onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
@@ -680,16 +710,31 @@ const App: React.FC = () => {
                 color: finalColor && finalColor.startsWith('#') ? '#ff5ca7' : '#888',
                 margin: '0 auto',
                 boxShadow: '0 2px 12px rgba(52,152,219,0.08)',
-                marginBottom: 32,
+                marginBottom: 16,
                 userSelect: 'all',
                 fontWeight: 700,
                 letterSpacing: 1,
                 transition: 'background 0.3s',
               }}>
-                {finalColor ? finalColor : '色がここに表示されます'}
+                {/* 色の四角のみ表示 */}
               </div>
+              {/* 色名を表示 */}
+              <div style={{ fontWeight: 700, fontSize: 18, color: '#ff5ca7', marginBottom: 2 }}>{getColorName(finalColor)}</div>
+              {/* カラーコードを下に分けて表示 */}
+              <div style={{
+                fontWeight: 700,
+                fontSize: 20,
+                color: '#222',
+                marginBottom: 16,
+                userSelect: 'all',
+                letterSpacing: 1,
+              }}>{finalColor ? finalColor : '色がここに表示されます'}</div>
               {pairColor && (
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 0 }}>
+                  {/* 相性の良い色の説明テキスト */}
+                  <div style={{ fontWeight: 600, fontSize: 15, color: '#00bcd4', marginBottom: 2, marginTop: 0, letterSpacing: 0.5 }}>
+                    相性の良い色
+                  </div>
                   <div style={{
                     width: 54,
                     height: 54,
@@ -700,14 +745,8 @@ const App: React.FC = () => {
                     marginBottom: 10,
                     transition: 'background 0.3s',
                   }} />
-                  <div style={{
-                    fontWeight: 600,
-                    fontSize: 15,
-                    color: '#00bcd4',
-                    marginBottom: 2,
-                    marginTop: 0,
-                    letterSpacing: 0.5,
-                  }}>相性の良い色</div>
+                  {/* 相性の良い色名を表示 */}
+                  <div style={{ fontWeight: 600, fontSize: 15, color: '#00bcd4', marginBottom: 2, marginTop: 0, letterSpacing: 0.5 }}>{getColorName(pairColor)}</div>
                   <div style={{
                     color: '#ff5ca7',
                     fontSize: 16,
