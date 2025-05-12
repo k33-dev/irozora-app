@@ -485,10 +485,10 @@ const App: React.FC = () => {
         background: '#fff',
         borderRadius: 40,
         boxShadow: '0 8px 32px #f8b6e055',
-        padding: '48px 6vw 48px 6vw',
+        padding: 'clamp(32px, 6vw, 48px) clamp(24px, 4vw, 48px)',
         maxWidth: 520,
-        width: '90%',
-        minHeight: 480,
+        width: '92%',
+        minHeight: 'clamp(400px, 80vh, 480px)',
         margin: '0 auto',
         position: 'relative',
         boxSizing: 'border-box',
@@ -502,20 +502,22 @@ const App: React.FC = () => {
             <div style={{
               fontFamily: "'Yusei Magic', 'M PLUS Rounded 1c', 'Zen Maru Gothic', 'Meiryo', sans-serif",
               fontWeight: 900,
-              fontSize: 48,
+              fontSize: 'clamp(36px, 8vw, 48px)',
               color: '#ff5ca7',
               letterSpacing: 3,
-              marginBottom: 32,
-              marginTop: 20,
+              marginBottom: 'clamp(24px, 4vw, 32px)',
+              marginTop: 'clamp(16px, 3vw, 20px)',
               textShadow: '0 2px 8px #6decb9',
+              textAlign: 'center',
+              lineHeight: 1.2,
             }}>いろぞら診断</div>
             <button onClick={handleStart} style={{
               background: 'linear-gradient(90deg, #ff5ca7 0%, #ffe156 100%)',
               color: '#fff',
               border: 'none',
               borderRadius: 32,
-              padding: '28px 56px',
-              fontSize: 28,
+              padding: 'clamp(20px, 4vw, 28px) clamp(40px, 8vw, 56px)',
+              fontSize: 'clamp(20px, 4vw, 28px)',
               fontWeight: 800,
               boxShadow: '0 8px 32px #ff5ca799',
               cursor: 'pointer',
@@ -524,7 +526,7 @@ const App: React.FC = () => {
               transition: 'background 0.3s, transform 0.15s, box-shadow 0.15s',
               letterSpacing: 1.2,
               whiteSpace: 'nowrap',
-              marginTop: 40,
+              marginTop: 'clamp(32px, 6vw, 40px)',
               alignSelf: 'center',
             }}
             onMouseDown={e => e.currentTarget.style.transform = 'scale(0.97)'}
@@ -588,20 +590,16 @@ const App: React.FC = () => {
             }}>
               {questions[current].options.map(opt => (
                 <label key={opt} style={{
-                  marginBottom: 4,
-                  fontSize: '1em',
-                  color: '#2d2d2d',
                   display: 'flex',
                   alignItems: 'center',
+                  marginBottom: 'clamp(8px, 2vw, 12px)',
+                  padding: 'clamp(8px, 2vw, 12px)',
+                  borderRadius: 12,
                   cursor: 'pointer',
-                  borderRadius: 8,
-                  padding: '4px 8px',
-                  background: answers[questions[current].key] === opt ? '#ffe15633' : 'transparent',
-                  border: answers[questions[current].key] === opt ? '1.5px solid #00bcd4' : '1.5px solid #eee',
-                  transition: 'background 0.2s, border 0.2s, box-shadow 0.15s, transform 0.12s',
-                  boxShadow: answers[questions[current].key] === opt ? '0 2px 8px #00bcd433' : 'none',
-                  minWidth: 60,
-                  justifyContent: 'center',
+                  transition: 'background 0.2s',
+                  fontSize: 'clamp(14px, 3vw, 16px)',
+                  width: '100%',
+                  boxSizing: 'border-box',
                 }}
                 onMouseDown={e => e.currentTarget.style.transform = 'scale(0.97)'}
                 onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
@@ -630,7 +628,7 @@ const App: React.FC = () => {
                 <div style={{
                   marginBottom: 6,
                   fontWeight: 600,
-                  fontSize: '1em',
+                  fontSize: 'clamp(13px, 3vw, 15px)',
                   color: '#00bcd4',
                   lineHeight: 1.3,
                 }}>自由記述（キーワード例：海、花、森、太陽、夜、空、火、雪、夢、音楽 など）</div>
