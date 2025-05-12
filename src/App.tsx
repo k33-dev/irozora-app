@@ -502,15 +502,15 @@ const App: React.FC = () => {
             <div style={{
               fontFamily: "'Yusei Magic', 'M PLUS Rounded 1c', 'Zen Maru Gothic', 'Meiryo', sans-serif",
               fontWeight: 900,
-              fontSize: 'clamp(24px, 5vw, 36px)',
+              fontSize: 'clamp(36px, 8vw, 48px)',
               color: '#ff5ca7',
               letterSpacing: 3,
-              marginBottom: 'clamp(16px, 3vw, 24px)',
-              marginTop: 'clamp(12px, 2vw, 16px)',
+              marginBottom: 'clamp(24px, 4vw, 32px)',
+              marginTop: 'clamp(16px, 3vw, 20px)',
               textShadow: '0 2px 8px #6decb9',
               textAlign: 'center',
-              lineHeight: 1.4,
-            }}>いろぞら診断<br />ー感情から今のあなたの色を診断ー</div>
+              lineHeight: 1.2,
+            }}>いろぞら診断</div>
             <button onClick={handleStart} style={{
               background: 'linear-gradient(90deg, #ff5ca7 0%, #ffe156 100%)',
               color: '#fff',
