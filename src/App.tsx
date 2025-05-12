@@ -695,43 +695,73 @@ const App: React.FC = () => {
         )}
         {step === 2 && (
           <>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 8 }}>
-              <div style={{
-                width: 'clamp(100px, 30vw, 120px)',
-                height: 'clamp(100px, 30vw, 120px)',
-                background: finalColor && finalColor.startsWith('#') ? finalColor : '#e0e0e0',
-                borderRadius: 20,
-                border: '2.5px solid #eee',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: 'clamp(20px, 5vw, 26px)',
-                color: finalColor && finalColor.startsWith('#') ? '#ff5ca7' : '#888',
-                margin: '0 auto',
-                boxShadow: '0 2px 12px rgba(52,152,219,0.08)',
-                marginBottom: 16,
-                userSelect: 'all',
-                fontWeight: 700,
-                letterSpacing: 1,
-                transition: 'background 0.3s',
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 8, width: '100%' }}>
+              {/* 診断結果の色 */}
+              <div style={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                alignItems: 'center', 
+                marginBottom: 'clamp(24px, 4vw, 32px)',
+                width: '100%'
               }}>
-                {/* 色の四角のみ表示 */}
+                <div style={{
+                  width: 'clamp(100px, 30vw, 120px)',
+                  height: 'clamp(100px, 30vw, 120px)',
+                  background: finalColor && finalColor.startsWith('#') ? finalColor : '#e0e0e0',
+                  borderRadius: 20,
+                  border: '2.5px solid #eee',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: 'clamp(20px, 5vw, 26px)',
+                  color: finalColor && finalColor.startsWith('#') ? '#ff5ca7' : '#888',
+                  margin: '0 auto',
+                  boxShadow: '0 2px 12px rgba(52,152,219,0.08)',
+                  marginBottom: 16,
+                  userSelect: 'all',
+                  fontWeight: 700,
+                  letterSpacing: 1,
+                  transition: 'background 0.3s',
+                }}>
+                  {/* 色の四角のみ表示 */}
+                </div>
+                {/* 色名を表示 */}
+                <div style={{ fontWeight: 700, fontSize: 18, color: '#ff5ca7', marginBottom: 2 }}>{getColorName(finalColor)}</div>
+                {/* カラーコードを下に分けて表示 */}
+                <div style={{
+                  fontWeight: 700,
+                  fontSize: 20,
+                  color: '#222',
+                  marginBottom: 16,
+                  userSelect: 'all',
+                  letterSpacing: 1,
+                }}>{finalColor ? finalColor : '色がここに表示されます'}</div>
               </div>
-              {/* 色名を表示 */}
-              <div style={{ fontWeight: 700, fontSize: 18, color: '#ff5ca7', marginBottom: 2 }}>{getColorName(finalColor)}</div>
-              {/* カラーコードを下に分けて表示 */}
+
+              {/* 区切り線 */}
               <div style={{
-                fontWeight: 700,
-                fontSize: 20,
-                color: '#222',
-                marginBottom: 16,
-                userSelect: 'all',
-                letterSpacing: 1,
-              }}>{finalColor ? finalColor : '色がここに表示されます'}</div>
+                width: '80%',
+                height: 1,
+                background: 'linear-gradient(90deg, transparent, #ff5ca7, transparent)',
+                margin: '8px 0 24px',
+              }} />
+
+              {/* 相性の良い色 */}
               {pairColor && (
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 0 }}>
+                <div style={{ 
+                  display: 'flex', 
+                  flexDirection: 'column', 
+                  alignItems: 'center',
+                  width: '100%'
+                }}>
                   {/* 相性の良い色の説明テキスト */}
-                  <div style={{ fontWeight: 600, fontSize: 15, color: '#00bcd4', marginBottom: 2, marginTop: 0, letterSpacing: 0.5 }}>
+                  <div style={{ 
+                    fontWeight: 600, 
+                    fontSize: 15, 
+                    color: '#00bcd4', 
+                    marginBottom: 12,
+                    letterSpacing: 0.5 
+                  }}>
                     相性の良い色
                   </div>
                   <div style={{
@@ -745,7 +775,13 @@ const App: React.FC = () => {
                     transition: 'background 0.3s',
                   }} />
                   {/* 相性の良い色名を表示 */}
-                  <div style={{ fontWeight: 600, fontSize: 15, color: '#00bcd4', marginBottom: 2, marginTop: 0, letterSpacing: 0.5 }}>{getColorName(pairColor)}</div>
+                  <div style={{ 
+                    fontWeight: 600, 
+                    fontSize: 15, 
+                    color: '#00bcd4', 
+                    marginBottom: 2,
+                    letterSpacing: 0.5 
+                  }}>{getColorName(pairColor)}</div>
                   <div style={{
                     color: '#ff5ca7',
                     fontSize: 16,
