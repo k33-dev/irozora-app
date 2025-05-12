@@ -443,83 +443,93 @@ const App: React.FC = () => {
     }}>
       <div style={{
         background: '#fff',
-        borderRadius: 28,
+        borderRadius: 40,
         boxShadow: '0 8px 32px #f8b6e055',
-        padding: '32px 6vw 32px 6vw',
-        maxWidth: 420,
+        padding: '48px 6vw 48px 6vw',
+        maxWidth: 520,
         width: '90%',
-        minHeight: 'auto',
+        minHeight: 480,
         textAlign: 'center',
         margin: '0 auto',
         position: 'relative',
         boxSizing: 'border-box',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
       }}>
-        {/* 質問中は右上にトップへ戻るボタン */}
-        {step === 1 && (
-          <button onClick={handleRestart} style={{
-            position: 'absolute',
-            top: 18,
-            right: 18,
-            background: '#f5faff',
-            color: '#3498db',
-            border: '1.5px solid #b3e0fc',
-            borderRadius: 8,
-            padding: '6px 16px',
-            fontSize: 14,
-            fontWeight: 600,
-            cursor: 'pointer',
-            boxShadow: '0 2px 8px rgba(52,152,219,0.04)',
-            transition: 'background 0.2s, color 0.2s, transform 0.1s',
-            zIndex: 2,
-          }}
-          onMouseDown={e => e.currentTarget.style.transform = 'scale(0.96)'}
-          onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
-          onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-          >トップに戻る</button>
-        )}
+        {/* トップ画面のみ表示 */}
         {step === 0 && (
           <>
-            {/* アプリ名ロゴ */}
             <div style={{
               fontFamily: "'M PLUS Rounded 1c', 'Zen Maru Gothic', 'Meiryo', sans-serif",
               fontWeight: 900,
-              fontSize: 32,
+              fontSize: 48,
               color: '#ff5ca7',
               letterSpacing: 3,
-              marginBottom: 16,
-              marginTop: 64,
+              marginBottom: 48,
+              marginTop: 0,
               textShadow: '0 2px 8px #6decb9',
             }}>いろぞら診断</div>
             <button onClick={handleStart} style={{
               background: 'linear-gradient(90deg, #ff5ca7 0%, #ffe156 100%)',
               color: '#fff',
               border: 'none',
-              borderRadius: 24,
-              padding: '18px 0',
-              fontSize: 18,
+              borderRadius: 32,
+              padding: '28px 0',
+              fontSize: 28,
               fontWeight: 800,
               width: '100%',
-              maxWidth: 340,
+              maxWidth: 420,
               minWidth: 220,
-              boxShadow: '0 4px 16px #ff5ca799',
+              boxShadow: '0 8px 32px #ff5ca799',
               cursor: 'pointer',
-              position: 'absolute',
-              left: '50%',
-              top: '50%',
-              transform: 'translate(-50%, -50%)',
+              position: 'relative',
+              left: '0',
+              top: '0',
+              transform: 'none',
               transition: 'background 0.3s, transform 0.15s, box-shadow 0.15s',
               letterSpacing: 1.2,
               whiteSpace: 'nowrap',
               display: 'block',
+              margin: '0 auto',
             }}
-            onMouseDown={e => e.currentTarget.style.transform = 'translate(-50%, -50%) scale(0.97)'}
-            onMouseUp={e => e.currentTarget.style.transform = 'translate(-50%, -50%) scale(1)'}
-            onMouseLeave={e => e.currentTarget.style.transform = 'translate(-50%, -50%) scale(1)'}
-            onMouseOver={e => e.currentTarget.style.boxShadow = '0 8px 32px #ffe15699'}
-            onMouseOut={e => e.currentTarget.style.boxShadow = '0 4px 16px #ff5ca799'}
+            onMouseDown={e => e.currentTarget.style.transform = 'scale(0.97)'}
+            onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
+            onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+            onMouseOver={e => e.currentTarget.style.boxShadow = '0 12px 36px #ffe15699'}
+            onMouseOut={e => e.currentTarget.style.boxShadow = '0 8px 32px #ff5ca799'}
             >
               あなたの今日の色を診断する
             </button>
+            {/* 制作者Xボタン */}
+            <a href="https://x.com/toe78560468" target="_blank" rel="noopener noreferrer"
+              style={{
+                display: 'inline-block',
+                position: 'absolute',
+                left: 32,
+                bottom: 32,
+                background: 'linear-gradient(90deg, #00bcd4 0%, #6decb9 100%)',
+                color: '#fff',
+                border: 'none',
+                borderRadius: 12,
+                padding: '10px 24px',
+                fontSize: 18,
+                fontWeight: 700,
+                boxShadow: '0 1px 4px #00bcd433',
+                cursor: 'pointer',
+                textDecoration: 'none',
+                letterSpacing: 1,
+                transition: 'background 0.3s, transform 0.15s, box-shadow 0.15s',
+              }}
+              onMouseDown={e => e.currentTarget.style.transform = 'scale(0.97)'}
+              onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
+              onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+              onMouseOver={e => e.currentTarget.style.boxShadow = '0 4px 12px #6decb9'}
+              onMouseOut={e => e.currentTarget.style.boxShadow = '0 1px 4px #00bcd433'}
+            >
+              制作者X
+            </a>
           </>
         )}
         {step === 1 && (
@@ -711,37 +721,6 @@ const App: React.FC = () => {
             {error && <div style={{ color: 'red', marginTop: 16 }}>{error}</div>}
           </>
         )}
-        {/* Xプロフィールボタン */}
-        <a href="https://x.com/toe78560468" target="_blank" rel="noopener noreferrer"
-          style={{
-            display: 'inline-block',
-            position: 'absolute',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            bottom: 16,
-            background: 'linear-gradient(90deg, #00bcd4 0%, #6decb9 100%)',
-            color: '#fff',
-            border: 'none',
-            borderRadius: 7,
-            padding: '7px 0',
-            fontSize: 13,
-            fontWeight: 700,
-            width: 110,
-            boxShadow: '0 1px 4px #00bcd433',
-            cursor: 'pointer',
-            textDecoration: 'none',
-            letterSpacing: 1,
-            transition: 'background 0.3s, transform 0.15s, box-shadow 0.15s',
-            boxSizing: 'border-box',
-          }}
-          onMouseDown={e => e.currentTarget.style.transform = 'scale(0.97)'}
-          onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
-          onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-          onMouseOver={e => e.currentTarget.style.boxShadow = '0 4px 12px #6decb9'}
-          onMouseOut={e => e.currentTarget.style.boxShadow = '0 1px 4px #00bcd433'}
-        >
-          制作者X
-        </a>
       </div>
     </div>
   );
