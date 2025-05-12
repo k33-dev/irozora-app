@@ -672,19 +672,20 @@ const App: React.FC = () => {
             {/* 質問中は右上にトップへ戻るボタン */}
             <button onClick={handleRestart} style={{
               position: 'absolute',
-              top: 18,
-              right: 18,
+              top: 'clamp(12px, 2vw, 18px)',
+              right: 'clamp(12px, 2vw, 18px)',
               background: '#f5faff',
               color: '#3498db',
               border: '1.5px solid #b3e0fc',
               borderRadius: 8,
-              padding: '6px 16px',
-              fontSize: 16,
+              padding: 'clamp(4px, 1vw, 6px) clamp(12px, 2vw, 16px)',
+              fontSize: 'clamp(13px, 2.5vw, 16px)',
               fontWeight: 600,
               cursor: 'pointer',
               boxShadow: '0 2px 8px rgba(52,152,219,0.04)',
               transition: 'background 0.2s, color 0.2s, transform 0.1s',
               zIndex: 2,
+              whiteSpace: 'nowrap',
             }}
             onMouseDown={e => e.currentTarget.style.transform = 'scale(0.96)'}
             onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
